@@ -6,7 +6,9 @@ const validation = (data) => {
       const comments = [];
       if (!/^[a-zA-Z]+$/.test(username)) {
         flag = true;
-        comments.push("Please enter a valid name E.g. Sunil Poojari");
+        comments.push(
+          "Please enter a valid name E.g. Sunil Please don't enter any special charater or blank space"
+        );
       }
       if (typeof +age !== "number") {
         flag = true;
@@ -16,9 +18,11 @@ const validation = (data) => {
         comments.push("Please enter a valid age E.g. 18");
       }
       for (let hobby of hobbies) {
-        if (!/^[a-zA-Z]+$/.test(hobby)) {
+        if (/[^A-z\s\d][\\\^]?/.test(hobby)) {
           flag = true;
-          comments.push("Please enter a valid hobby E.g. Playing Cricket");
+          comments.push(
+            "Please enter a valid hobby E.g. Playing Cricket Please don't enter any special charater"
+          );
         }
       }
       if (!flag) resolve({ flag, comments, status: 200 });
